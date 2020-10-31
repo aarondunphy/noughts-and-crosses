@@ -1,3 +1,3 @@
 # Naughts & Crosses
 
-[Play Game](https://vigilant-bardeen-d23402.netlify.app/)
+[Play Game](https://naughts-and-crosses.netlify.app/)
