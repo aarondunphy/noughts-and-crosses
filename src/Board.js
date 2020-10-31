@@ -27,7 +27,10 @@ class Board extends React.Component {
         const user = this.state.user;
         this.updateGame(gameIndex, user);
         this.changeUser();
-        
+    }
+
+    isDraw() {
+        return this.state.clicks === 9 && this.state.winner === null
     }
 
     updateGame(gameIndex, value) {
@@ -112,6 +115,7 @@ class Board extends React.Component {
                 key={index}
                 type={this.state.game[box]}
                 onClick={this.handleClick.bind(this, box)}
+                disabled={this.isDraw() || this.state.winner}
             />
         );
         return (
@@ -131,7 +135,7 @@ class Board extends React.Component {
                     <button type="button" onClick={this.resetGame.bind(this)}>Reset</button>
                     </>
                 }
-                {this.state.clicks === 9 && this.state.winner === null &&
+                {this.isDraw() &&
                     <>
                     <h2>Draw!</h2>
                     <button type="button" onClick={this.resetGame.bind(this)}>Reset</button>
