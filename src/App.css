@@ -82,3 +82,13 @@ button.playAgainBtn:hover{
     color: #81b8ef;
     cursor: pointer;
 }
+
+@media(max-width: 500px){
+    .board{
+        max-width: 312px;
+    }
+    .box{
+        width: 100px;
+        height: 100px;
+    }   
+}
