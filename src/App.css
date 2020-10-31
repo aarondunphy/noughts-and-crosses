@@ -1,3 +1,7 @@
+*{
+    box-sizing: border-box;
+}
+
 .App {
   text-align: center;
 }
@@ -35,4 +39,29 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.board{
+    max-width: 462px;
+    display: flex;
+    flex-flow: wrap;
+}
+
+.box{
+    background-color: #3a434e;
+    color: #80b7ef;
+    margin: 2px;
+    width: 150px;
+    height: 150px;
+    font-size: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.box:not(.has-value):hover{
+    background-color: #4d6175;
+    cursor: pointer;
+}
+.box p{
+    margin: 0px;
 }
