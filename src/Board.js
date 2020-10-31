@@ -119,26 +119,26 @@ class Board extends React.Component {
             />
         );
         return (
-            <div>
+            <div className="board-container">
                 <div className="board">
                     {game}
                 </div>
                 {this.state.winner === "cross" &&
                     <>
-                    <h2>Cross Wins!</h2>
-                    <button type="button" onClick={this.resetGame.bind(this)}>Reset</button>
+                    <h2>Cross Wins! 🎉</h2>
+                    <button type="button" className="playAgainBtn" onClick={this.resetGame.bind(this)}>Play Again!</button>
                     </>
                 }
                 {this.state.winner === "naught" &&
                     <>
-                    <h2>Naught Wins!</h2>
-                    <button type="button" onClick={this.resetGame.bind(this)}>Reset</button>
+                    <h2>Naught Wins! 🎉</h2>
+                    <button type="button" className="playAgainBtn" onClick={this.resetGame.bind(this)}>Play Again!</button>
                     </>
                 }
                 {this.isDraw() &&
                     <>
-                    <h2>Draw!</h2>
-                    <button type="button" onClick={this.resetGame.bind(this)}>Reset</button>
+                    <h2>Draw! 👀</h2>
+                    <button type="button" className="playAgainBtn" onClick={this.resetGame.bind(this)}>Play Again!</button>
                     </>
                 }
             </div>
