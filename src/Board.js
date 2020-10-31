@@ -137,7 +137,7 @@ class Board extends React.Component {
                 }
                 {this.isDraw() &&
                     <>
-                    <h2>Draw! 👀</h2>
+                    <h2>Draw! 🤷‍♂️</h2>
                     <button type="button" className="playAgainBtn" onClick={this.resetGame.bind(this)}>Play Again!</button>
                     </>
                 }
