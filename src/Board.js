@@ -1,150 +1,128 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Box from "./Box";
 
-class Board extends React.Component {
+const Board = () => {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            user: "cross",
-            winner: null,
-            clicks: 0,
-            game: {
-                box1: null,
-                box2: null,
-                box3: null,
-                box4: null,
-                box5: null,
-                box6: null,
-                box7: null,
-                box8: null,
-                box9: null,
-            },
-        };
+  const [user, setUser] = useState("cross")
+  const [winner, setWinner] = useState(null)
+  const [clicks, setClicks] = useState(0)
+  const [game, setGame] = useState({
+    box1: null,
+    box2: null,
+    box3: null,
+    box4: null,
+    box5: null,
+    box6: null,
+    box7: null,
+    box8: null,
+    box9: null,
+  })
+
+
+    const handleClick = (gameIndex) => {
+      setClicks(clicks + 1)
+      updateGame(gameIndex, user);
+      changeUser();
     }
 
-    handleClick = (gameIndex) => {
-        const user = this.state.user;
-        this.updateGame(gameIndex, user);
-        this.changeUser();
+    const isDraw = () => {
+      return clicks === 9 && winner === null
     }
 
-    isDraw() {
-        return this.state.clicks === 9 && this.state.winner === null
+    const updateGame = (gameIndex, value) => {
+        const gameCopy = {...game};
+        gameCopy[gameIndex] = value;
+        setGame(gameCopy)
     }
 
-    updateGame(gameIndex, value) {
-        const game = this.state.game;
-        game[gameIndex] = value;
-        this.setState({
-            game: game,
-        }, () => {
-            this.checkForWin();
-        });
+    useEffect(() => {
+        checkForWin()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    },  [game])
+    
+
+    const checkForWin = () => {
+        checkLine("box1", "box2", "box3");
+        checkLine("box1", "box4", "box7");
+        checkLine("box1", "box5", "box9");
+        checkLine("box2", "box5", "box8");
+        checkLine("box4", "box5", "box6");
+        checkLine("box7", "box8", "box9");
+        checkLine("box3", "box6", "box9");
+        checkLine("box3", "box5", "box7");
     }
 
-    checkForDraw() {
-        const game = this.state.game;
-        if(Object.values(game).includes(null) === false) {
-            if(this.state.winner === null) {
-                this.setState({
-                    winner: "draw",
-                });
-            }
-        }
-    }
-
-    checkForWin() {
-        const clicks = this.state.clicks;
-        this.setState({clicks: clicks + 1});
-        this.checkLine("box1", "box2", "box3");
-        this.checkLine("box1", "box4", "box7");
-        this.checkLine("box1", "box5", "box9");
-        this.checkLine("box2", "box5", "box8");
-        this.checkLine("box4", "box5", "box6");
-        this.checkLine("box7", "box8", "box9");
-        this.checkLine("box3", "box6", "box9");
-        this.checkLine("box3", "box5", "box7");
-    }
-
-    checkLine(boxIndex1, boxIndex2, boxIndex3) {
+    const checkLine = (boxIndex1, boxIndex2, boxIndex3) => {
         if(
-            this.state.game[boxIndex1] === "naught" &&
-            this.state.game[boxIndex2] === "naught" &&
-            this.state.game[boxIndex3] === "naught"
+            game[boxIndex1] === "naught" &&
+            game[boxIndex2] === "naught" &&
+            game[boxIndex3] === "naught"
         ) {
-            this.setState({winner: "naught"});
+            setWinner("naught");
         }else if(
-            this.state.game[boxIndex1] === "cross" &&
-            this.state.game[boxIndex2] === "cross" &&
-            this.state.game[boxIndex3] === "cross"
+            game[boxIndex1] === "cross" &&
+            game[boxIndex2] === "cross" &&
+            game[boxIndex3] === "cross"
         ) {
-            this.setState({winner: "cross"});
+            setWinner("cross");
         }
     }
 
-    changeUser() {
-        const user = this.state.user;
-        this.setState({
-            user: user === "naught" ? "cross" : "naught",
-        })
+    const changeUser = () => {
+      setUser(user === "naught" ? "cross" : "naught")
     }
 
-    resetGame() {
-        this.setState({
-            user: "cross",
-            winner: null,
-            clicks: 0,
-            game: {
-                box1: null,
-                box2: null,
-                box3: null,
-                box4: null,
-                box5: null,
-                box6: null,
-                box7: null,
-                box8: null,
-                box9: null,
-            },
-        });
+    const resetGame = () => {
+      setUser("cross")
+      setWinner(null)
+      setClicks(0)
+      setGame({
+        box1: null,
+        box2: null,
+        box3: null,
+        box4: null,
+        box5: null,
+        box6: null,
+        box7: null,
+        box8: null,
+        box9: null,
+      })
     }
 
-    render() {
-        const game = Object.keys(this.state.game).map((box, index) => 
-            <Box
-                key={index}
-                type={this.state.game[box]}
-                onClick={this.handleClick.bind(this, box)}
-                disabled={this.isDraw() || this.state.winner}
-            />
-        );
-        return (
-            <div className="board-container">
-                <div className="board">
-                    {game}
-                </div>
-                {this.state.winner === "cross" &&
-                    <>
-                    <h2>Cross Wins! 🎉</h2>
-                    <button type="button" className="playAgainBtn" onClick={this.resetGame.bind(this)}>Play Again!</button>
-                    </>
-                }
-                {this.state.winner === "naught" &&
-                    <>
-                    <h2>Naught Wins! 🎉</h2>
-                    <button type="button" className="playAgainBtn" onClick={this.resetGame.bind(this)}>Play Again!</button>
-                    </>
-                }
-                {this.isDraw() &&
-                    <>
-                    <h2>Draw! 🤷‍♂️</h2>
-                    <button type="button" className="playAgainBtn" onClick={this.resetGame.bind(this)}>Play Again!</button>
-                    </>
-                }
+    const gameBoard = Object.keys(game).map((box, index) => 
+        <Box
+            key={index}
+            type={game[box]}
+            handleClick={() => handleClick(box)}
+            disabled={isDraw() || winner}
+        />
+    );
+    return (
+        <div className="board-container">
+            <div className="board">
+                {gameBoard}
             </div>
+            {winner === "cross" &&
+                <>
+                <h2>Cross Wins! 🎉</h2>
+                <button type="button" className="playAgainBtn" onClick={resetGame}>Play Again!</button>
+                </>
+            }
+            {winner === "naught" &&
+                <>
+                <h2>Naught Wins! 🎉</h2>
+                <button type="button" className="playAgainBtn" onClick={resetGame}>Play Again!</button>
+                </>
+            }
+            {isDraw() &&
+                <>
+                <h2>Draw! 🤷‍♂️</h2>
+                <button type="button" className="playAgainBtn" onClick={resetGame}>Play Again!</button>
+                </>
+            }
+        </div>
 
-        );
-    }
+    );
 
 }
 

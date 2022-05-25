@@ -1,13 +1,17 @@
-function Box(props) {
+const Box = ({
+  type,
+  disabled,
+  handleClick,
+}) => {
     return (
         <div
-            className={"box " + (props.type || props.disabled ? "has-value": "no-value")}
-            onClick={props.type === null && !props.disabled ? props.onClick: null}
+            className={"box " + (type || disabled ? "has-value": "no-value")}
+            onClick={type === null && !disabled ? handleClick : null}
         >
-        {props.type === "cross" && 
+        {type === "cross" && 
             <p>X</p>
         }
-        {props.type === "naught" && 
+        {type === "naught" && 
             <p>O</p>
         }
       </div>
