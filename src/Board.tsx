@@ -39,7 +39,7 @@ const Board = (): JSX.Element => {
   }
 
   const isDraw = (): boolean => {
-    return clicks === 9 && winner === null
+    return clicks === 9 && winner === ""
   }
 
   const updateGame = (gameIndex: keyof Game, value: string) => {
