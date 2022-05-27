@@ -1,5 +1,5 @@
 import React from "react"
-import { BoxProps, Option } from "../Common/types"
+import { BoxProps, User } from "../Common/types"
 
 const Box = ({ type, disabled, handleClick }: BoxProps): JSX.Element => {
   return (
@@ -7,8 +7,8 @@ const Box = ({ type, disabled, handleClick }: BoxProps): JSX.Element => {
       className={"box " + (type || disabled ? "has-value" : "no-value")}
       onClick={handleClick}
     >
-      {type === Option.Cross && <p>X</p>}
-      {type === Option.Naught && <p>O</p>}
+      {type === User.CROSS && <p>X</p>}
+      {type === User.NAUGHT && <p>O</p>}
     </div>
   )
 }

@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react"
 import Box from "../Box"
-import { Option, Game } from "../Common/types"
+import { User, Game, Winner } from "../Common/types"
+import Outcome from "../Outcome"
 
 const Board = (): JSX.Element => {
-  const [user, setUser] = useState<Option>(Option.Cross)
-  const [winner, setWinner] = useState<Option | null>(null)
+  const [user, setUser] = useState<User>(User.CROSS)
+  const [winner, setWinner] = useState<Winner | null>(null)
   const [clicks, setClicks] = useState<number>(0)
   const [game, setGame] = useState<Game>({
     box1: null,
@@ -24,14 +25,10 @@ const Board = (): JSX.Element => {
     }
     setClicks(clicks + 1)
     updateGame(gameIndex, user)
-    changeUser()
+    setUser(user === User.NAUGHT ? User.CROSS : User.NAUGHT)
   }
 
-  const isDraw = (): boolean => {
-    return clicks === 9 && winner === null
-  }
-
-  const updateGame = (gameIndex: keyof Game, value: Option) => {
+  const updateGame = (gameIndex: keyof Game, value: User) => {
     const gameCopy = { ...game }
     gameCopy[gameIndex] = value
     setGame(gameCopy)
@@ -39,6 +36,11 @@ const Board = (): JSX.Element => {
 
   useEffect(() => {
     checkForWin()
+
+    // max clicks and no winner = draw
+    if (clicks === 9 && winner === null) {
+      setWinner(Winner.DRAW)
+    }
   }, [game])
 
   const checkForWin = () => {
@@ -58,26 +60,22 @@ const Board = (): JSX.Element => {
     boxIndex3: keyof Game
   ) => {
     if (
-      game[boxIndex1] === Option.Naught &&
-      game[boxIndex2] === Option.Naught &&
-      game[boxIndex3] === Option.Naught
+      game[boxIndex1] === User.NAUGHT &&
+      game[boxIndex2] === User.NAUGHT &&
+      game[boxIndex3] === User.NAUGHT
     ) {
-      setWinner(Option.Naught)
+      setWinner(Winner.NAUGHT)
     } else if (
-      game[boxIndex1] === Option.Cross &&
-      game[boxIndex2] === Option.Cross &&
-      game[boxIndex3] === Option.Cross
+      game[boxIndex1] === User.CROSS &&
+      game[boxIndex2] === User.CROSS &&
+      game[boxIndex3] === User.CROSS
     ) {
-      setWinner(Option.Cross)
+      setWinner(Winner.CROSS)
     }
   }
 
-  const changeUser = () => {
-    setUser(user === Option.Naught ? Option.Cross : Option.Naught)
-  }
-
   const resetGame = () => {
-    setUser(Option.Cross)
+    setUser(User.CROSS)
     setWinner(null)
     setClicks(0)
     setGame({
@@ -102,35 +100,13 @@ const Board = (): JSX.Element => {
               key={index}
               type={game[box as keyof Game]}
               handleClick={() => handleClick(box as keyof Game)}
-              disabled={isDraw() || winner !== null}
+              disabled={winner === Winner.DRAW || winner !== null}
             />
           )
         })}
       </div>
-      {winner === Option.Cross && (
-        <>
-          <h2>Cross Wins! 🎉</h2>
-          <button type="button" className="playAgainBtn" onClick={resetGame}>
-            Play Again!
-          </button>
-        </>
-      )}
-      {winner === Option.Naught && (
-        <>
-          <h2>Naught Wins! 🎉</h2>
-          <button type="button" className="playAgainBtn" onClick={resetGame}>
-            Play Again!
-          </button>
-        </>
-      )}
-      {isDraw() && (
-        <>
-          <h2>Draw! 🤷‍♂️</h2>
-          <button type="button" className="playAgainBtn" onClick={resetGame}>
-            Play Again!
-          </button>
-        </>
-      )}
+
+      <Outcome winner={winner} resetGame={resetGame} />
     </div>
   )
 }
