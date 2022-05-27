@@ -1,21 +1,25 @@
 import React, { useState, useEffect } from "react"
 import Box from "./Box"
 
+export enum Option {
+  Naught = "NAUGHT",
+  Cross = "CROSS",
+}
 interface Game {
-  box1: string | null
-  box2: string | null
-  box3: string | null
-  box4: string | null
-  box5: string | null
-  box6: string | null
-  box7: string | null
-  box8: string | null
-  box9: string | null
+  box1: Option | null
+  box2: Option | null
+  box3: Option | null
+  box4: Option | null
+  box5: Option | null
+  box6: Option | null
+  box7: Option | null
+  box8: Option | null
+  box9: Option | null
 }
 
 const Board = (): JSX.Element => {
-  const [user, setUser] = useState<string>("cross")
-  const [winner, setWinner] = useState<string>("")
+  const [user, setUser] = useState<Option>(Option.Cross)
+  const [winner, setWinner] = useState<Option | null>(null)
   const [clicks, setClicks] = useState<number>(0)
   const [game, setGame] = useState<Game>({
     box1: null,
@@ -30,7 +34,7 @@ const Board = (): JSX.Element => {
   })
 
   const handleClick = (gameIndex: keyof Game) => {
-    if (game[gameIndex] !== null || winner !== "") {
+    if (game[gameIndex] !== null || winner !== null) {
       return
     }
     setClicks(clicks + 1)
@@ -39,10 +43,10 @@ const Board = (): JSX.Element => {
   }
 
   const isDraw = (): boolean => {
-    return clicks === 9 && winner === ""
+    return clicks === 9 && winner === null
   }
 
-  const updateGame = (gameIndex: keyof Game, value: string) => {
+  const updateGame = (gameIndex: keyof Game, value: Option) => {
     const gameCopy = { ...game }
     gameCopy[gameIndex] = value
     setGame(gameCopy)
@@ -69,27 +73,27 @@ const Board = (): JSX.Element => {
     boxIndex3: keyof Game
   ) => {
     if (
-      game[boxIndex1] === "naught" &&
-      game[boxIndex2] === "naught" &&
-      game[boxIndex3] === "naught"
+      game[boxIndex1] === Option.Naught &&
+      game[boxIndex2] === Option.Naught &&
+      game[boxIndex3] === Option.Naught
     ) {
-      setWinner("naught")
+      setWinner(Option.Naught)
     } else if (
-      game[boxIndex1] === "cross" &&
-      game[boxIndex2] === "cross" &&
-      game[boxIndex3] === "cross"
+      game[boxIndex1] === Option.Cross &&
+      game[boxIndex2] === Option.Cross &&
+      game[boxIndex3] === Option.Cross
     ) {
-      setWinner("cross")
+      setWinner(Option.Cross)
     }
   }
 
   const changeUser = () => {
-    setUser(user === "naught" ? "cross" : "naught")
+    setUser(user === Option.Naught ? Option.Cross : Option.Naught)
   }
 
   const resetGame = () => {
-    setUser("cross")
-    setWinner("")
+    setUser(Option.Cross)
+    setWinner(null)
     setClicks(0)
     setGame({
       box1: null,
@@ -113,12 +117,12 @@ const Board = (): JSX.Element => {
               key={index}
               type={game[box as keyof Game]}
               handleClick={() => handleClick(box as keyof Game)}
-              disabled={isDraw() || winner.length > 0}
+              disabled={isDraw() || winner !== null}
             />
           )
         })}
       </div>
-      {winner === "cross" && (
+      {winner === Option.Cross && (
         <>
           <h2>Cross Wins! 🎉</h2>
           <button type="button" className="playAgainBtn" onClick={resetGame}>
@@ -126,7 +130,7 @@ const Board = (): JSX.Element => {
           </button>
         </>
       )}
-      {winner === "naught" && (
+      {winner === Option.Naught && (
         <>
           <h2>Naught Wins! 🎉</h2>
           <button type="button" className="playAgainBtn" onClick={resetGame}>

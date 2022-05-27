@@ -1,4 +1,5 @@
 import React from "react"
+import { Option } from "./Board"
 
 interface BoxProps {
   type: string | null
@@ -12,8 +13,8 @@ const Box = ({ type, disabled, handleClick }: BoxProps): JSX.Element => {
       className={"box " + (type || disabled ? "has-value" : "no-value")}
       onClick={handleClick}
     >
-      {type === "cross" && <p>X</p>}
-      {type === "naught" && <p>O</p>}
+      {type === Option.Cross && <p>X</p>}
+      {type === Option.Naught && <p>O</p>}
     </div>
   )
 }
