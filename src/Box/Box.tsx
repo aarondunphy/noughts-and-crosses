@@ -1,11 +1,5 @@
 import React from "react"
-import { Option } from "./Board"
-
-interface BoxProps {
-  type: string | null
-  disabled: boolean
-  handleClick?: () => void
-}
+import { BoxProps, Option } from "../Common/types"
 
 const Box = ({ type, disabled, handleClick }: BoxProps): JSX.Element => {
   return (

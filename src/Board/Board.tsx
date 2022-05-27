@@ -1,21 +1,6 @@
 import React, { useState, useEffect } from "react"
-import Box from "./Box"
-
-export enum Option {
-  Naught = "NAUGHT",
-  Cross = "CROSS",
-}
-interface Game {
-  box1: Option | null
-  box2: Option | null
-  box3: Option | null
-  box4: Option | null
-  box5: Option | null
-  box6: Option | null
-  box7: Option | null
-  box8: Option | null
-  box9: Option | null
-}
+import Box from "../Box"
+import { Option, Game } from "../Common/types"
 
 const Board = (): JSX.Element => {
   const [user, setUser] = useState<Option>(Option.Cross)
