@@ -8,7 +8,7 @@ export default function PlayerSelection(): JSX.Element {
   const { state, dispatch } = useAppContext()
 
   const handleStartGame = () => {
-    if (state.playerOne === "" || state.playerTwo === "") {
+    if (state.playerOne.name === "" || state.playerTwo.name === "") {
       alert("Please ensure both players have a name set to start the game!")
       return
     }
@@ -25,11 +25,11 @@ export default function PlayerSelection(): JSX.Element {
         <div>
           <input
             type="text"
-            value={state.playerTwo}
+            value={state.playerTwo.name}
             onChange={(e) =>
               dispatch({
-                type: AppContextActionTypes.SET_PLAYER_TWO_NAME,
-                payload: { value: e.target.value },
+                type: AppContextActionTypes.UPDATE_PLAYER_TWO,
+                payload: { ...state.playerTwo, name: e.target.value },
               })
             }
             className="playerSelection__input"
@@ -45,11 +45,11 @@ export default function PlayerSelection(): JSX.Element {
         <div>
           <input
             type="text"
-            value={state.playerOne}
+            value={state.playerOne.name}
             onChange={(e) =>
               dispatch({
-                type: AppContextActionTypes.SET_PLAYER_ONE_NAME,
-                payload: { value: e.target.value },
+                type: AppContextActionTypes.UPDATE_PLAYER_ONE,
+                payload: { ...state.playerOne, name: e.target.value },
               })
             }
             className="playerSelection__input"

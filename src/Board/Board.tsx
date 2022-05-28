@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react"
+import { useAppContext } from "../App/AppProvider"
 import Box from "../Box"
-import { User, Game, Winner } from "../Common/types"
+import { User, Game, Winner, AppContextActionTypes } from "../Common/types"
 import Outcome from "../Outcome"
 import "./style.scss"
 
 const Board = (): JSX.Element => {
+  const { state, dispatch } = useAppContext()
   const [user, setUser] = useState<User>(User.CROSS)
   const [winner, setWinner] = useState<Winner | null>(null)
   const [clicks, setClicks] = useState<number>(0)
@@ -38,6 +40,20 @@ const Board = (): JSX.Element => {
   useEffect(() => {
     checkForWin()
   }, [game])
+
+  useEffect(() => {
+    if (winner === Winner.CROSS) {
+      dispatch({
+        type: AppContextActionTypes.UPDATE_PLAYER_TWO,
+        payload: { ...state.playerTwo, score: state.playerTwo.score + 1 },
+      })
+    } else if (winner === Winner.NAUGHT) {
+      dispatch({
+        type: AppContextActionTypes.UPDATE_PLAYER_ONE,
+        payload: { ...state.playerOne, score: state.playerOne.score + 1 },
+      })
+    }
+  }, [winner])
 
   const checkForWin = () => {
     let winnerFound = false

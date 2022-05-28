@@ -35,40 +35,42 @@ export interface OutcomeProps {
 }
 
 export interface AppContextType {
-  playerOne?: string
-  playerTwo?: string
+  playerOne: Player
+  playerTwo: Player
   startGame?: boolean
+}
+
+export interface Player {
+  name: string
+  score: number
 }
 
 export interface AppProviderProps {
   children: React.ReactNode
 }
 
+export enum AppContextActionTypes {
+  UPDATE_PLAYER_ONE = "Update player one",
+  UPDATE_PLAYER_TWO = "Update player two",
+  START_GAME = "Start game",
+}
+
 export type AppContextAction =
   | {
-      type: AppContextActionTypes.SET_PLAYER_ONE_NAME
-      payload: { value: string }
+      type: AppContextActionTypes.UPDATE_PLAYER_ONE
+      payload: Player
     }
   | {
-      type: AppContextActionTypes.SET_PLAYER_TWO_NAME
-      payload: { value: string }
+      type: AppContextActionTypes.UPDATE_PLAYER_TWO
+      payload: Player
     }
   | {
       type: AppContextActionTypes.START_GAME
     }
-
-export enum AppContextActionTypes {
-  SET_PLAYER_ONE_NAME = "Set player one name",
-  SET_PLAYER_TWO_NAME = "Set player two name",
-  START_GAME = "Start game",
-}
-
 export interface AppContextReducer {
   state: AppContextType
-  dispatch: Dispatch
+  dispatch: (action: AppContextAction) => void
 }
-
-export type Dispatch = (action: AppContextAction) => void
 
 export interface ButtonProps {
   onClick: () => void

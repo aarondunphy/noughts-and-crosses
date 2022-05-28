@@ -12,10 +12,10 @@ export default function Outcome({
   return (
     <div className="outcome">
       {winner === Winner.CROSS && (
-        <h2 className="outcome__winner">{state.playerTwo} Wins! 🎉</h2>
+        <h2 className="outcome__winner">{state.playerTwo.name} Wins! 🎉</h2>
       )}
       {winner === Winner.NAUGHT && (
-        <h2 className="outcome__winner">{state.playerOne} Wins! 🎉</h2>
+        <h2 className="outcome__winner">{state.playerOne.name} Wins! 🎉</h2>
       )}
       {winner === Winner.DRAW && <h2 className="outcome__winner">Draw! 🤷‍♂️</h2>}
       {winner !== null && (

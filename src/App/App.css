@@ -21,10 +21,14 @@ button,
 a {
   padding: 0;
   margin: 0;
+  line-height: 1.3;
+}
+
+body {
+  background-color: #282c34;
 }
 
 .App {
-  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -32,4 +36,8 @@ a {
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+  max-width: 1000px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
 }

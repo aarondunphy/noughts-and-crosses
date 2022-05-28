@@ -2,6 +2,7 @@ import React from "react"
 import { useAppContext } from "../App/AppProvider"
 import Board from "../Board"
 import PlayerSelection from "../PlayerSelection"
+import Score from "../Score"
 import "./style.scss"
 
 export default function GameContainer(): JSX.Element {
@@ -12,7 +13,12 @@ export default function GameContainer(): JSX.Element {
       <h1 className="gameContainer__title">Naughts &amp; Crosses</h1>
       {state.startGame === false && <PlayerSelection />}
 
-      {state.startGame === true && <Board />}
+      {state.startGame === true && (
+        <>
+          <Score />
+          <Board />
+        </>
+      )}
     </div>
   )
 }

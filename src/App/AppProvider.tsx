@@ -13,11 +13,17 @@ export const AppContext = createContext<AppContextReducer | undefined>(
 
 const appReducer = (state: AppContextType, action: AppContextAction) => {
   switch (action.type) {
-    case AppContextActionTypes.SET_PLAYER_ONE_NAME: {
-      return { ...state, playerOne: action.payload.value }
+    case AppContextActionTypes.UPDATE_PLAYER_ONE: {
+      return {
+        ...state,
+        playerOne: action.payload,
+      }
     }
-    case AppContextActionTypes.SET_PLAYER_TWO_NAME: {
-      return { ...state, playerTwo: action.payload.value }
+    case AppContextActionTypes.UPDATE_PLAYER_TWO: {
+      return {
+        ...state,
+        playerTwo: action.payload,
+      }
     }
     case AppContextActionTypes.START_GAME: {
       return { ...state, startGame: true }
@@ -40,8 +46,8 @@ export default function AppProvider({
   children,
 }: AppProviderProps): JSX.Element {
   const initialState: AppContextType = {
-    playerOne: "",
-    playerTwo: "",
+    playerOne: { name: "", score: 0 },
+    playerTwo: { name: "", score: 0 },
     startGame: false,
   }
   const [state, dispatch] = useReducer(appReducer, initialState)
