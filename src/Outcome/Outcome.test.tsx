@@ -5,7 +5,7 @@ import Outcome from "./Outcome"
 import { Winner } from "../Common/types"
 
 describe("<Outcome />", () => {
-  it("renders only the winner naughts", async () => {
+  it("renders only the winner naughts", () => {
     const playAgainFnMock = jest.fn()
     const { getByTestId, queryByTestId } = render(
       <AppProvider>
@@ -17,7 +17,7 @@ describe("<Outcome />", () => {
     expect(queryByTestId("outcome-winner-draw")).not.toBeInTheDocument()
   })
 
-  it("renders only the winner cross", async () => {
+  it("renders only the winner cross", () => {
     const playAgainFnMock = jest.fn()
     const { getByTestId, queryByTestId } = render(
       <AppProvider>
@@ -29,7 +29,7 @@ describe("<Outcome />", () => {
     expect(queryByTestId("outcome-winner-draw")).not.toBeInTheDocument()
   })
 
-  it("renders only draw if there are no winners", async () => {
+  it("renders only draw if there are no winners", () => {
     const playAgainFnMock = jest.fn()
     const { getByTestId, queryByTestId } = render(
       <AppProvider>
@@ -41,7 +41,7 @@ describe("<Outcome />", () => {
     expect(queryByTestId("outcome-winner-cross")).not.toBeInTheDocument()
   })
 
-  it("resets the game board when the play again button is clicked", async () => {
+  it("resets the game board when the play again button is clicked", () => {
     const playAgainFnMock = jest.fn()
     const { getByTestId } = render(
       <AppProvider>

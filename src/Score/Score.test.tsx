@@ -4,7 +4,7 @@ import AppProvider from "../App/AppProvider"
 import Score from "./Score"
 
 describe("<Score />", () => {
-  it("renders correctly", async () => {
+  it("renders correctly", () => {
     const { getByTestId, getAllByTestId } = render(
       <AppProvider>
         <Score />

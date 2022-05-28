@@ -4,7 +4,7 @@ import AppProvider from "../App/AppProvider"
 import PlayerSelection from "./PlayerSelection"
 
 describe("<PlayerSelection />", () => {
-  it("renders correctly", async () => {
+  it("renders correctly", () => {
     const { getByTestId, getAllByTestId } = render(
       <AppProvider>
         <PlayerSelection />
@@ -15,7 +15,7 @@ describe("<PlayerSelection />", () => {
     expect(getAllByTestId("ps-name-input").length).toEqual(2)
   })
 
-  it("alerts if a player's name is missing", async () => {
+  it("alerts if a player's name is missing", () => {
     const alertMock = jest.spyOn(window, "alert").mockImplementation()
     const { getByTestId } = render(
       <AppProvider>
@@ -27,7 +27,7 @@ describe("<PlayerSelection />", () => {
     expect(alertMock).toHaveBeenCalledTimes(1)
   })
 
-  it("does not alert if both players have entered a name", async () => {
+  it("does not alert if both players have entered a name", () => {
     const alertMock = jest.spyOn(window, "alert").mockImplementation()
     const { getByTestId, getAllByTestId } = render(
       <AppProvider>
