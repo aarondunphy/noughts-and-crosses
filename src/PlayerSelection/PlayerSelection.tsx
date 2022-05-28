@@ -19,7 +19,9 @@ export default function PlayerSelection(): JSX.Element {
 
   return (
     <div className="playerSelection">
-      <h2 className="playerSelection__title">Who&apos;s Playing?</h2>
+      <h2 className="playerSelection__title" data-testid="ps-title">
+        Who&apos;s Playing?
+      </h2>
 
       <div className="playerSelection__playerNamesContainer">
         <div>
@@ -34,6 +36,7 @@ export default function PlayerSelection(): JSX.Element {
             }
             className="playerSelection__input"
             placeholder="Enter player two name..."
+            data-testid="ps-name-input"
           />
           <p className="playerSelection__playerInfo">Playing as crosses</p>
         </div>
@@ -54,14 +57,16 @@ export default function PlayerSelection(): JSX.Element {
             }
             className="playerSelection__input"
             placeholder="Enter player one name..."
+            data-testid="ps-name-input"
           />
           <p className="playerSelection__playerInfo">Playing as naughts</p>
         </div>
       </div>
 
       <Button
-        onClick={handleStartGame}
+        testid="ps-startGame-btn"
         className="playerSelection__startButton"
+        onClick={handleStartGame}
       >
         Start Game
       </Button>
