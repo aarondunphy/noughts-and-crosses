@@ -12,18 +12,18 @@ export enum Winner {
 }
 
 export interface Game {
-  box1: User | null
-  box2: User | null
-  box3: User | null
-  box4: User | null
-  box5: User | null
-  box6: User | null
-  box7: User | null
-  box8: User | null
-  box9: User | null
+  gameSquare1: User | null
+  gameSquare2: User | null
+  gameSquare3: User | null
+  gameSquare4: User | null
+  gameSquare5: User | null
+  gameSquare6: User | null
+  gameSquare7: User | null
+  gameSquare8: User | null
+  gameSquare9: User | null
 }
 
-export interface BoxProps {
+export interface GameSquareProps {
   type: string | null
   disabled: boolean
   handleClick?: () => void

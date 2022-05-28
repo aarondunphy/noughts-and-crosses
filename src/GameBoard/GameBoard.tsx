@@ -1,25 +1,25 @@
 import React, { useState, useEffect } from "react"
 import { useAppContext } from "../App/AppProvider"
-import Box from "../Box"
+import GameSquare from "../GameSquare"
 import { User, Game, Winner, AppContextActionTypes } from "../Common/types"
 import Outcome from "../Outcome"
 import "./style.scss"
 
-const Board = (): JSX.Element => {
+const GameBoard = (): JSX.Element => {
   const { state, dispatch } = useAppContext()
   const [user, setUser] = useState<User>(User.CROSS)
   const [winner, setWinner] = useState<Winner | null>(null)
   const [clicks, setClicks] = useState<number>(0)
   const [game, setGame] = useState<Game>({
-    box1: null,
-    box2: null,
-    box3: null,
-    box4: null,
-    box5: null,
-    box6: null,
-    box7: null,
-    box8: null,
-    box9: null,
+    gameSquare1: null,
+    gameSquare2: null,
+    gameSquare3: null,
+    gameSquare4: null,
+    gameSquare5: null,
+    gameSquare6: null,
+    gameSquare7: null,
+    gameSquare8: null,
+    gameSquare9: null,
   })
 
   const handleClick = (gameIndex: keyof Game) => {
@@ -58,20 +58,20 @@ const Board = (): JSX.Element => {
   const checkForWin = () => {
     let winnerFound = false
     const winnerLines = [
-      ["box1", "box2", "box3"],
-      ["box1", "box4", "box7"],
-      ["box1", "box5", "box9"],
-      ["box2", "box5", "box8"],
-      ["box4", "box5", "box6"],
-      ["box7", "box8", "box9"],
-      ["box3", "box6", "box9"],
-      ["box3", "box5", "box7"],
+      ["gameSquare1", "gameSquare2", "gameSquare3"],
+      ["gameSquare1", "gameSquare4", "gameSquare7"],
+      ["gameSquare1", "gameSquare5", "gameSquare9"],
+      ["gameSquare2", "gameSquare5", "gameSquare8"],
+      ["gameSquare4", "gameSquare5", "gameSquare6"],
+      ["gameSquare7", "gameSquare8", "gameSquare9"],
+      ["gameSquare3", "gameSquare6", "gameSquare9"],
+      ["gameSquare3", "gameSquare5", "gameSquare7"],
     ]
 
     winnerLines.forEach((line) => {
       const lineMatches = line.reduce(
-        (carry, box) => {
-          switch (game[box as keyof Game]) {
+        (carry, gameSquare) => {
+          switch (game[gameSquare as keyof Game]) {
             case User.CROSS: {
               carry.crossMatches = carry.crossMatches + 1
               break
@@ -105,27 +105,27 @@ const Board = (): JSX.Element => {
     setWinner(null)
     setClicks(0)
     setGame({
-      box1: null,
-      box2: null,
-      box3: null,
-      box4: null,
-      box5: null,
-      box6: null,
-      box7: null,
-      box8: null,
-      box9: null,
+      gameSquare1: null,
+      gameSquare2: null,
+      gameSquare3: null,
+      gameSquare4: null,
+      gameSquare5: null,
+      gameSquare6: null,
+      gameSquare7: null,
+      gameSquare8: null,
+      gameSquare9: null,
     })
   }
 
   return (
-    <div className="board-container">
-      <div className="board">
-        {Object.keys(game).map((box: string, index) => {
+    <div className="gameBoard">
+      <div className="gameBoard__inner">
+        {Object.keys(game).map((gameSquare: string, index) => {
           return (
-            <Box
+            <GameSquare
               key={index}
-              type={game[box as keyof Game]}
-              handleClick={() => handleClick(box as keyof Game)}
+              type={game[gameSquare as keyof Game]}
+              handleClick={() => handleClick(gameSquare as keyof Game)}
               disabled={winner === Winner.DRAW || winner !== null}
             />
           )
@@ -137,4 +137,4 @@ const Board = (): JSX.Element => {
   )
 }
 
-export default Board
+export default GameBoard

@@ -1,4 +1,4 @@
-.box {
+.gameSquare {
   background-color: #3a434e;
   color: #80b7ef;
   margin: 2px;
@@ -9,11 +9,11 @@
   align-items: center;
   justify-content: center;
 }
-.box:not(.has-value):hover {
+.gameSquare:not(.has-value):hover {
   background-color: #4d6175;
   cursor: pointer;
 }
-.box p {
+.gameSquare p {
   margin: 0px;
 }
 
@@ -33,7 +33,7 @@ button.playAgainBtn:hover {
 }
 
 @media (max-width: 500px) {
-  .box {
+  .gameSquare {
     width: 100px;
     height: 100px;
     font-size: 80px;
