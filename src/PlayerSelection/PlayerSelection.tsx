@@ -6,7 +6,6 @@ import { Button } from "../ui-components"
 
 export default function PlayerSelection(): JSX.Element {
   const { state, dispatch } = useAppContext()
-  console.log("state: ", state)
 
   const handleStartGame = () => {
     if (state.playerOne === "" || state.playerTwo === "") {

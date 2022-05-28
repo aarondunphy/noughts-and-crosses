@@ -37,41 +37,50 @@ const Board = (): JSX.Element => {
 
   useEffect(() => {
     checkForWin()
-
-    // max clicks and no winner = draw
-    if (clicks === 9 && winner === null) {
-      setWinner(Winner.DRAW)
-    }
   }, [game])
 
   const checkForWin = () => {
-    checkLine("box1", "box2", "box3")
-    checkLine("box1", "box4", "box7")
-    checkLine("box1", "box5", "box9")
-    checkLine("box2", "box5", "box8")
-    checkLine("box4", "box5", "box6")
-    checkLine("box7", "box8", "box9")
-    checkLine("box3", "box6", "box9")
-    checkLine("box3", "box5", "box7")
-  }
+    let winnerFound = false
+    const winnerLines = [
+      ["box1", "box2", "box3"],
+      ["box1", "box4", "box7"],
+      ["box1", "box5", "box9"],
+      ["box2", "box5", "box8"],
+      ["box4", "box5", "box6"],
+      ["box7", "box8", "box9"],
+      ["box3", "box6", "box9"],
+      ["box3", "box5", "box7"],
+    ]
 
-  const checkLine = (
-    boxIndex1: keyof Game,
-    boxIndex2: keyof Game,
-    boxIndex3: keyof Game
-  ) => {
-    if (
-      game[boxIndex1] === User.NAUGHT &&
-      game[boxIndex2] === User.NAUGHT &&
-      game[boxIndex3] === User.NAUGHT
-    ) {
-      setWinner(Winner.NAUGHT)
-    } else if (
-      game[boxIndex1] === User.CROSS &&
-      game[boxIndex2] === User.CROSS &&
-      game[boxIndex3] === User.CROSS
-    ) {
-      setWinner(Winner.CROSS)
+    winnerLines.forEach((line) => {
+      const lineMatches = line.reduce(
+        (carry, box) => {
+          switch (game[box as keyof Game]) {
+            case User.CROSS: {
+              carry.crossMatches = carry.crossMatches + 1
+              break
+            }
+            case User.NAUGHT: {
+              carry.naughtMatches = carry.naughtMatches + 1
+              break
+            }
+          }
+          return carry
+        },
+        {
+          naughtMatches: 0,
+          crossMatches: 0,
+        }
+      )
+      if (lineMatches.crossMatches === 3 || lineMatches.naughtMatches === 3) {
+        winnerFound = true
+        setWinner(lineMatches.crossMatches === 3 ? Winner.CROSS : Winner.NAUGHT)
+      }
+    })
+
+    // max clicks and no winner = draw
+    if (clicks === 9 && winnerFound === false) {
+      setWinner(Winner.DRAW)
     }
   }
 
