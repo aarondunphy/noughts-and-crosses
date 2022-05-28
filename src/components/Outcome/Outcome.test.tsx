@@ -1,16 +1,16 @@
 import React from "react"
 import { render, fireEvent } from "@testing-library/react"
-import AppProvider from "../App/AppProvider"
+import GameProvider from "../../providers/GameProvider"
 import Outcome from "./Outcome"
-import { Winner } from "../Common/types"
+import { Winner } from "../../common/types"
 
 describe("<Outcome />", () => {
   it("renders only the winner naughts", () => {
     const playAgainFnMock = jest.fn()
     const { getByTestId, queryByTestId } = render(
-      <AppProvider>
+      <GameProvider>
         <Outcome winner={Winner.NAUGHT} resetGame={playAgainFnMock} />
-      </AppProvider>
+      </GameProvider>
     )
     expect(getByTestId("outcome-winner-naught")).toBeInTheDocument()
     expect(queryByTestId("outcome-winner-cross")).not.toBeInTheDocument()
@@ -20,9 +20,9 @@ describe("<Outcome />", () => {
   it("renders only the winner cross", () => {
     const playAgainFnMock = jest.fn()
     const { getByTestId, queryByTestId } = render(
-      <AppProvider>
+      <GameProvider>
         <Outcome winner={Winner.CROSS} resetGame={playAgainFnMock} />
-      </AppProvider>
+      </GameProvider>
     )
     expect(getByTestId("outcome-winner-cross")).toBeInTheDocument()
     expect(queryByTestId("outcome-winner-naught")).not.toBeInTheDocument()
@@ -32,9 +32,9 @@ describe("<Outcome />", () => {
   it("renders only draw if there are no winners", () => {
     const playAgainFnMock = jest.fn()
     const { getByTestId, queryByTestId } = render(
-      <AppProvider>
+      <GameProvider>
         <Outcome winner={Winner.DRAW} resetGame={playAgainFnMock} />
-      </AppProvider>
+      </GameProvider>
     )
     expect(getByTestId("outcome-winner-draw")).toBeInTheDocument()
     expect(queryByTestId("outcome-winner-naught")).not.toBeInTheDocument()
@@ -44,9 +44,9 @@ describe("<Outcome />", () => {
   it("resets the game board when the play again button is clicked", () => {
     const playAgainFnMock = jest.fn()
     const { getByTestId } = render(
-      <AppProvider>
+      <GameProvider>
         <Outcome winner={Winner.DRAW} resetGame={playAgainFnMock} />
-      </AppProvider>
+      </GameProvider>
     )
     const btn = getByTestId("outcome-playAgainBtn")
     fireEvent.click(btn)

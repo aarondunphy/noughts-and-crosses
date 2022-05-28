@@ -1,5 +1,5 @@
 import React from "react"
-import { GameSquareProps, User } from "../Common/types"
+import { GameSquareProps, User } from "../../common/types"
 import "./style.scss"
 
 const GameSquare = ({

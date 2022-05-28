@@ -34,7 +34,7 @@ export interface OutcomeProps {
   resetGame: () => void
 }
 
-export interface AppContextType {
+export interface GameContextType {
   playerOne: Player
   playerTwo: Player
   startGame?: boolean
@@ -45,31 +45,31 @@ export interface Player {
   score: number
 }
 
-export interface AppProviderProps {
+export interface GameProviderProps {
   children: React.ReactNode
 }
 
-export enum AppContextActionTypes {
+export enum GameContextActionTypes {
   UPDATE_PLAYER_ONE = "Update player one",
   UPDATE_PLAYER_TWO = "Update player two",
   START_GAME = "Start game",
 }
 
-export type AppContextAction =
+export type GameContextAction =
   | {
-      type: AppContextActionTypes.UPDATE_PLAYER_ONE
+      type: GameContextActionTypes.UPDATE_PLAYER_ONE
       payload: Player
     }
   | {
-      type: AppContextActionTypes.UPDATE_PLAYER_TWO
+      type: GameContextActionTypes.UPDATE_PLAYER_TWO
       payload: Player
     }
   | {
-      type: AppContextActionTypes.START_GAME
+      type: GameContextActionTypes.START_GAME
     }
-export interface AppContextReducer {
-  state: AppContextType
-  dispatch: (action: AppContextAction) => void
+export interface GameContextReducer {
+  state: GameContextType
+  dispatch: (action: GameContextAction) => void
 }
 
 export interface ButtonProps {

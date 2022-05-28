@@ -1,5 +1,5 @@
 import React from "react"
-import { ButtonProps } from "../../Common/types"
+import { ButtonProps } from "../../common/types"
 import "./style.scss"
 
 export default function Button({

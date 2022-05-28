@@ -1,11 +1,11 @@
 import React from "react"
 import "./style.scss"
-import { useAppContext } from "../App/AppProvider"
-import { AppContextActionTypes } from "../Common/types"
-import { Button } from "../ui-components"
+import { useGameContext } from "../../providers/GameProvider"
+import { GameContextActionTypes } from "../../common/types"
+import { Button } from "../../ui-components"
 
 export default function PlayerSelection(): JSX.Element {
-  const { state, dispatch } = useAppContext()
+  const { state, dispatch } = useGameContext()
 
   const handleStartGame = () => {
     if (state.playerOne.name === "" || state.playerTwo.name === "") {
@@ -13,7 +13,7 @@ export default function PlayerSelection(): JSX.Element {
       return
     }
     dispatch({
-      type: AppContextActionTypes.START_GAME,
+      type: GameContextActionTypes.START_GAME,
     })
   }
 
@@ -30,7 +30,7 @@ export default function PlayerSelection(): JSX.Element {
             value={state.playerTwo.name}
             onChange={(e) =>
               dispatch({
-                type: AppContextActionTypes.UPDATE_PLAYER_TWO,
+                type: GameContextActionTypes.UPDATE_PLAYER_TWO,
                 payload: { ...state.playerTwo, name: e.target.value },
               })
             }
@@ -51,7 +51,7 @@ export default function PlayerSelection(): JSX.Element {
             value={state.playerOne.name}
             onChange={(e) =>
               dispatch({
-                type: AppContextActionTypes.UPDATE_PLAYER_ONE,
+                type: GameContextActionTypes.UPDATE_PLAYER_ONE,
                 payload: { ...state.playerOne, name: e.target.value },
               })
             }

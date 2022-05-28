@@ -1,12 +1,12 @@
 import React from "react"
-import { useAppContext } from "../App/AppProvider"
+import { useGameContext } from "../../providers/GameProvider"
 import GameBoard from "../GameBoard"
 import PlayerSelection from "../PlayerSelection"
 import Score from "../Score"
 import "./style.scss"
 
 export default function GameContainer(): JSX.Element {
-  const { state } = useAppContext()
+  const { state } = useGameContext()
 
   return (
     <div className="gameContainer">

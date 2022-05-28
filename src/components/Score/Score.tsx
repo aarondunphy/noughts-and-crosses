@@ -1,9 +1,9 @@
 import React from "react"
-import { useAppContext } from "../App/AppProvider"
+import { useGameContext } from "../../providers/GameProvider"
 import "./style.scss"
 
 export default function Score(): JSX.Element {
-  const { state } = useAppContext()
+  const { state } = useGameContext()
 
   return (
     <div className="score">

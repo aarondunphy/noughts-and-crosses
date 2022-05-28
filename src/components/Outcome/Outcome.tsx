@@ -1,14 +1,14 @@
 import React from "react"
-import { useAppContext } from "../App/AppProvider"
-import { Winner, OutcomeProps } from "../Common/types"
-import { Button } from "../ui-components"
+import { useGameContext } from "../../providers/GameProvider"
+import { Winner, OutcomeProps } from "../../common/types"
+import { Button } from "../../ui-components"
 import "./style.scss"
 
 export default function Outcome({
   winner,
   resetGame,
 }: OutcomeProps): JSX.Element {
-  const { state } = useAppContext()
+  const { state } = useGameContext()
   return (
     <div className="outcome">
       {winner === Winner.CROSS && (

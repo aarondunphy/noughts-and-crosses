@@ -1,14 +1,14 @@
 import React from "react"
 import { render, fireEvent } from "@testing-library/react"
-import AppProvider from "../App/AppProvider"
+import GameProvider from "../../providers/GameProvider"
 import PlayerSelection from "./PlayerSelection"
 
 describe("<PlayerSelection />", () => {
   it("renders correctly", () => {
     const { getByTestId, getAllByTestId } = render(
-      <AppProvider>
+      <GameProvider>
         <PlayerSelection />
-      </AppProvider>
+      </GameProvider>
     )
     expect(getByTestId("ps-startGame-btn")).toBeInTheDocument()
     expect(getByTestId("ps-title")).toBeInTheDocument()
@@ -18,9 +18,9 @@ describe("<PlayerSelection />", () => {
   it("alerts if a player's name is missing", () => {
     const alertMock = jest.spyOn(window, "alert").mockImplementation()
     const { getByTestId } = render(
-      <AppProvider>
+      <GameProvider>
         <PlayerSelection />
-      </AppProvider>
+      </GameProvider>
     )
     const startGameBtn = getByTestId("ps-startGame-btn")
     fireEvent.click(startGameBtn)
@@ -30,9 +30,9 @@ describe("<PlayerSelection />", () => {
   it("does not alert if both players have entered a name", () => {
     const alertMock = jest.spyOn(window, "alert").mockImplementation()
     const { getByTestId, getAllByTestId } = render(
-      <AppProvider>
+      <GameProvider>
         <PlayerSelection />
-      </AppProvider>
+      </GameProvider>
     )
     const inputs = getAllByTestId("ps-name-input")
     fireEvent.change(inputs[0], { target: { value: "Name one" } })

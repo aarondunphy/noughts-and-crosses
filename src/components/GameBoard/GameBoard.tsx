@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react"
-import { useAppContext } from "../App/AppProvider"
+import { useGameContext } from "../../providers/GameProvider"
 import GameSquare from "../GameSquare"
-import { User, Game, Winner, AppContextActionTypes } from "../Common/types"
+import { User, Game, Winner, GameContextActionTypes } from "../../common/types"
 import Outcome from "../Outcome"
 import "./style.scss"
 
 const GameBoard = (): JSX.Element => {
-  const { state, dispatch } = useAppContext()
+  const { state, dispatch } = useGameContext()
   const [user, setUser] = useState<User>(User.CROSS)
   const [winner, setWinner] = useState<Winner | null>(null)
   const [clicks, setClicks] = useState<number>(0)
@@ -44,12 +44,12 @@ const GameBoard = (): JSX.Element => {
   useEffect(() => {
     if (winner === Winner.CROSS) {
       dispatch({
-        type: AppContextActionTypes.UPDATE_PLAYER_TWO,
+        type: GameContextActionTypes.UPDATE_PLAYER_TWO,
         payload: { ...state.playerTwo, score: state.playerTwo.score + 1 },
       })
     } else if (winner === Winner.NAUGHT) {
       dispatch({
-        type: AppContextActionTypes.UPDATE_PLAYER_ONE,
+        type: GameContextActionTypes.UPDATE_PLAYER_ONE,
         payload: { ...state.playerOne, score: state.playerOne.score + 1 },
       })
     }

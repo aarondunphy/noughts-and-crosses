@@ -1,14 +1,14 @@
 import React from "react"
 import "./App.css"
-import AppProvider from "./AppProvider"
+import GameProvider from "../../providers/GameProvider"
 import GameContainer from "../GameContainer"
 
 const App = (): JSX.Element => {
   return (
     <div className="App">
-      <AppProvider>
+      <GameProvider>
         <GameContainer />
-      </AppProvider>
+      </GameProvider>
     </div>
   )
 }
