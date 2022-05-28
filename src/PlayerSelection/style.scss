@@ -1,0 +1,32 @@
+.playerSelection {
+  &__title {
+    text-align: center;
+    font-size: 3rem;
+    margin: 2rem 0;
+  }
+  &__playerNamesContainer {
+    display: flex;
+    gap: 3rem;
+    align-items: center;
+    margin-bottom: 3rem;
+  }
+  &__input {
+    color: #fff;
+    background-color: #8c97ae;
+    padding: 2rem;
+    font-size: 2.6rem;
+    &::placeholder {
+      color: #c1d1ee;
+    }
+  }
+  &__startButton {
+    display: flex;
+    margin: 0 auto;
+  }
+  &__playerInfo {
+    font-size: 1.4rem;
+  }
+  &__vs {
+    font-size: 4rem;
+  }
+}

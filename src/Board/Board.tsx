@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react"
 import Box from "../Box"
 import { User, Game, Winner } from "../Common/types"
 import Outcome from "../Outcome"
+import "./style.scss"
 
 const Board = (): JSX.Element => {
   const [user, setUser] = useState<User>(User.CROSS)

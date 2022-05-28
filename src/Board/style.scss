@@ -1,0 +1,16 @@
+.board-container {
+  margin-bottom: 20px;
+}
+
+.board {
+  max-width: 462px;
+  display: flex;
+  flex-flow: wrap;
+  margin-bottom: 3rem;
+}
+
+@media (max-width: 500px) {
+  .board {
+    max-width: 312px;
+  }
+}

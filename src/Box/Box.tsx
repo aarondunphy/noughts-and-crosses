@@ -1,5 +1,6 @@
 import React from "react"
 import { BoxProps, User } from "../Common/types"
+import "./style.scss"
 
 const Box = ({ type, disabled, handleClick }: BoxProps): JSX.Element => {
   return (

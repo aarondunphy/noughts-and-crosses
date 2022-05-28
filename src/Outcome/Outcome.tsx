@@ -1,36 +1,28 @@
 import React from "react"
+import { useAppContext } from "../App/AppProvider"
 import { Winner, OutcomeProps } from "../Common/types"
+import { Button } from "../ui-components"
+import "./style.scss"
 
 export default function Outcome({
   winner,
   resetGame,
 }: OutcomeProps): JSX.Element {
+  const { state } = useAppContext()
   return (
-    <>
+    <div className="outcome">
       {winner === Winner.CROSS && (
-        <>
-          <h2>Cross Wins! 🎉</h2>
-          <button type="button" className="playAgainBtn" onClick={resetGame}>
-            Play Again!
-          </button>
-        </>
+        <h2 className="outcome__winner">{state.playerTwo} Wins! 🎉</h2>
       )}
       {winner === Winner.NAUGHT && (
-        <>
-          <h2>Naught Wins! 🎉</h2>
-          <button type="button" className="playAgainBtn" onClick={resetGame}>
-            Play Again!
-          </button>
-        </>
+        <h2 className="outcome__winner">{state.playerOne} Wins! 🎉</h2>
       )}
-      {winner === Winner.DRAW && (
-        <>
-          <h2>Draw! 🤷‍♂️</h2>
-          <button type="button" className="playAgainBtn" onClick={resetGame}>
-            Play Again!
-          </button>
-        </>
+      {winner === Winner.DRAW && <h2 className="outcome__winner">Draw! 🤷‍♂️</h2>}
+      {winner !== null && (
+        <Button className="outcome__playAgainButton" onClick={resetGame}>
+          Play Again!
+        </Button>
       )}
-    </>
+    </div>
   )
 }

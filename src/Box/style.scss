@@ -1,0 +1,41 @@
+.box {
+  background-color: #3a434e;
+  color: #80b7ef;
+  margin: 2px;
+  width: 150px;
+  height: 150px;
+  font-size: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.box:not(.has-value):hover {
+  background-color: #4d6175;
+  cursor: pointer;
+}
+.box p {
+  margin: 0px;
+}
+
+button.playAgainBtn {
+  border: 2px solid #81b8ef;
+  background-color: #81b8ef;
+  color: #282d33;
+  padding: 10px 20px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+button.playAgainBtn:hover {
+  background-color: #282d33;
+  color: #81b8ef;
+  cursor: pointer;
+}
+
+@media (max-width: 500px) {
+  .box {
+    width: 100px;
+    height: 100px;
+    font-size: 80px;
+  }
+}

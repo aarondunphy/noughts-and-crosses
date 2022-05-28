@@ -1,0 +1,10 @@
+.outcome {
+  text-align: center;
+  &__winner {
+    margin-bottom: 1rem;
+  }
+  &__playAgainButton {
+    background-color: #fff;
+    cursor: pointer;
+  }
+}
