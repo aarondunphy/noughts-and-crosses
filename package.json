@@ -21,7 +21,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "lint": "npx eslint src/ --max-warnings=0",
+    "prepare": "husky install"
   },
   "browserslist": {
     "production": [
@@ -37,6 +39,8 @@
   },
   "devDependencies": {
     "eslint-config-prettier": "^8.5.0",
+    "husky": "^8.0.0",
+    "lint-staged": ">=10",
     "prettier": "2.6.2"
   }
 }
