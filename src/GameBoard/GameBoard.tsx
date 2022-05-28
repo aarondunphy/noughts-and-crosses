@@ -118,7 +118,7 @@ const GameBoard = (): JSX.Element => {
   }
 
   return (
-    <div className="gameBoard">
+    <div className="gameBoard" data-testid="gameBoard">
       <div className="gameBoard__inner">
         {Object.keys(game).map((gameSquare: string, index) => {
           return (

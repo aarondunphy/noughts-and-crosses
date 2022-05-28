@@ -18,7 +18,7 @@ export default function PlayerSelection(): JSX.Element {
   }
 
   return (
-    <div className="playerSelection">
+    <div className="playerSelection" data-testid="playerSelection">
       <h2 className="playerSelection__title" data-testid="ps-title">
         Who&apos;s Playing?
       </h2>
