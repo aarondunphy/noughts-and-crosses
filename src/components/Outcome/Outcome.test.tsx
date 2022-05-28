@@ -5,14 +5,14 @@ import Outcome from "./Outcome"
 import { Winner } from "../../common/types"
 
 describe("<Outcome />", () => {
-  it("renders only the winner naughts", () => {
+  it("renders only the winner noughts", () => {
     const playAgainFnMock = jest.fn()
     const { getByTestId, queryByTestId } = render(
       <GameProvider>
-        <Outcome winner={Winner.NAUGHT} resetGame={playAgainFnMock} />
+        <Outcome winner={Winner.NOUGHT} resetGame={playAgainFnMock} />
       </GameProvider>
     )
-    expect(getByTestId("outcome-winner-naught")).toBeInTheDocument()
+    expect(getByTestId("outcome-winner-nought")).toBeInTheDocument()
     expect(queryByTestId("outcome-winner-cross")).not.toBeInTheDocument()
     expect(queryByTestId("outcome-winner-draw")).not.toBeInTheDocument()
   })
@@ -25,7 +25,7 @@ describe("<Outcome />", () => {
       </GameProvider>
     )
     expect(getByTestId("outcome-winner-cross")).toBeInTheDocument()
-    expect(queryByTestId("outcome-winner-naught")).not.toBeInTheDocument()
+    expect(queryByTestId("outcome-winner-nought")).not.toBeInTheDocument()
     expect(queryByTestId("outcome-winner-draw")).not.toBeInTheDocument()
   })
 
@@ -37,7 +37,7 @@ describe("<Outcome />", () => {
       </GameProvider>
     )
     expect(getByTestId("outcome-winner-draw")).toBeInTheDocument()
-    expect(queryByTestId("outcome-winner-naught")).not.toBeInTheDocument()
+    expect(queryByTestId("outcome-winner-nought")).not.toBeInTheDocument()
     expect(queryByTestId("outcome-winner-cross")).not.toBeInTheDocument()
   })
 

@@ -16,8 +16,8 @@ export default function Outcome({
           {state.playerTwo.name} Wins! 🎉
         </h2>
       )}
-      {winner === Winner.NAUGHT && (
-        <h2 className="outcome__winner" data-testid="outcome-winner-naught">
+      {winner === Winner.NOUGHT && (
+        <h2 className="outcome__winner" data-testid="outcome-winner-nought">
           {state.playerOne.name} Wins! 🎉
         </h2>
       )}

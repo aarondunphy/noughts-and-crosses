@@ -59,7 +59,7 @@ export default function PlayerSelection(): JSX.Element {
             placeholder="Enter player one name..."
             data-testid="ps-name-input"
           />
-          <p className="playerSelection__playerInfo">Playing as naughts</p>
+          <p className="playerSelection__playerInfo">Playing as noughts</p>
         </div>
       </div>
 

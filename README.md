@@ -1,3 +1,3 @@
-# Naughts & Crosses
+# Noughts & Crosses
 
-[Play Game](https://naughts-and-crosses.netlify.app/)
+[Play Game](https://noughts-and-crosses.netlify.app/)

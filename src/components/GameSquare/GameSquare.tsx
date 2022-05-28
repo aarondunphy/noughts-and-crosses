@@ -13,7 +13,7 @@ const GameSquare = ({
       onClick={handleClick}
     >
       {type === User.CROSS && <p>X</p>}
-      {type === User.NAUGHT && <p>O</p>}
+      {type === User.NOUGHT && <p>O</p>}
     </div>
   )
 }

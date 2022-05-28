@@ -10,7 +10,7 @@ export default function GameContainer(): JSX.Element {
 
   return (
     <div className="gameContainer">
-      <h1 className="gameContainer__title">Naughts &amp; Crosses</h1>
+      <h1 className="gameContainer__title">Noughts &amp; Crosses</h1>
       {state.startGame === false && <PlayerSelection />}
 
       {state.startGame === true && (

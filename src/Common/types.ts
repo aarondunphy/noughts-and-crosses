@@ -1,27 +1,16 @@
 import React from "react"
 
 export enum User {
-  NAUGHT = "Naught",
+  NOUGHT = "Nought",
   CROSS = "Cross",
 }
 
 export enum Winner {
-  NAUGHT = "Naught",
+  NOUGHT = "Nought",
   CROSS = "Cross",
   DRAW = "Draw",
 }
-
-export interface Game {
-  gameSquare1: User | null
-  gameSquare2: User | null
-  gameSquare3: User | null
-  gameSquare4: User | null
-  gameSquare5: User | null
-  gameSquare6: User | null
-  gameSquare7: User | null
-  gameSquare8: User | null
-  gameSquare9: User | null
-}
+export type GameSquareType = User | null
 
 export interface GameSquareProps {
   type: string | null

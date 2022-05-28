@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from "react"
 import { useGameContext } from "../../providers/GameProvider"
 import GameSquare from "../GameSquare"
-import { User, Game, Winner, GameContextActionTypes } from "../../common/types"
+import {
+  User,
+  Winner,
+  GameContextActionTypes,
+  GameSquareType,
+} from "../../common/types"
 import Outcome from "../Outcome"
 import "./style.scss"
 
@@ -10,29 +15,19 @@ const GameBoard = (): JSX.Element => {
   const [user, setUser] = useState<User>(User.CROSS)
   const [winner, setWinner] = useState<Winner | null>(null)
   const [clicks, setClicks] = useState<number>(0)
-  const [game, setGame] = useState<Game>({
-    gameSquare1: null,
-    gameSquare2: null,
-    gameSquare3: null,
-    gameSquare4: null,
-    gameSquare5: null,
-    gameSquare6: null,
-    gameSquare7: null,
-    gameSquare8: null,
-    gameSquare9: null,
-  })
+  const [game, setGame] = useState<GameSquareType[]>(Array(9).fill(null))
 
-  const handleClick = (gameIndex: keyof Game) => {
+  const handleClick = (gameIndex: number) => {
     if (game[gameIndex] !== null || winner !== null) {
       return
     }
     setClicks(clicks + 1)
     updateGame(gameIndex, user)
-    setUser(user === User.NAUGHT ? User.CROSS : User.NAUGHT)
+    setUser(user === User.NOUGHT ? User.CROSS : User.NOUGHT)
   }
 
-  const updateGame = (gameIndex: keyof Game, value: User) => {
-    const gameCopy = { ...game }
+  const updateGame = (gameIndex: number, value: User) => {
+    const gameCopy = [...game]
     gameCopy[gameIndex] = value
     setGame(gameCopy)
   }
@@ -47,7 +42,7 @@ const GameBoard = (): JSX.Element => {
         type: GameContextActionTypes.UPDATE_PLAYER_TWO,
         payload: { ...state.playerTwo, score: state.playerTwo.score + 1 },
       })
-    } else if (winner === Winner.NAUGHT) {
+    } else if (winner === Winner.NOUGHT) {
       dispatch({
         type: GameContextActionTypes.UPDATE_PLAYER_ONE,
         payload: { ...state.playerOne, score: state.playerOne.score + 1 },
@@ -57,44 +52,30 @@ const GameBoard = (): JSX.Element => {
 
   const checkForWin = () => {
     let winnerFound = false
-    const winnerLines = [
-      ["gameSquare1", "gameSquare2", "gameSquare3"],
-      ["gameSquare1", "gameSquare4", "gameSquare7"],
-      ["gameSquare1", "gameSquare5", "gameSquare9"],
-      ["gameSquare2", "gameSquare5", "gameSquare8"],
-      ["gameSquare4", "gameSquare5", "gameSquare6"],
-      ["gameSquare7", "gameSquare8", "gameSquare9"],
-      ["gameSquare3", "gameSquare6", "gameSquare9"],
-      ["gameSquare3", "gameSquare5", "gameSquare7"],
+    const winningLines = [
+      [0, 1, 2],
+      [0, 3, 6],
+      [0, 4, 8],
+      [1, 4, 7],
+      [3, 4, 5],
+      [6, 7, 8],
+      [2, 5, 8],
+      [2, 4, 6],
     ]
 
-    winnerLines.forEach((line) => {
-      const lineMatches = line.reduce(
-        (carry, gameSquare) => {
-          switch (game[gameSquare as keyof Game]) {
-            case User.CROSS: {
-              carry.crossMatches = carry.crossMatches + 1
-              break
-            }
-            case User.NAUGHT: {
-              carry.naughtMatches = carry.naughtMatches + 1
-              break
-            }
-          }
-          return carry
-        },
-        {
-          naughtMatches: 0,
-          crossMatches: 0,
-        }
-      )
-      if (lineMatches.crossMatches === 3 || lineMatches.naughtMatches === 3) {
+    for (const line of winningLines) {
+      const [square1, square2, square3] = line
+      if (
+        game[square1] !== null &&
+        game[square1] === game[square2] &&
+        game[square2] === game[square3]
+      ) {
         winnerFound = true
-        setWinner(lineMatches.crossMatches === 3 ? Winner.CROSS : Winner.NAUGHT)
+        setWinner(game[square1] === User.CROSS ? Winner.CROSS : Winner.NOUGHT)
+        break
       }
-    })
+    }
 
-    // max clicks and no winner = draw
     if (clicks === 9 && winnerFound === false) {
       setWinner(Winner.DRAW)
     }
@@ -104,28 +85,18 @@ const GameBoard = (): JSX.Element => {
     setUser(User.CROSS)
     setWinner(null)
     setClicks(0)
-    setGame({
-      gameSquare1: null,
-      gameSquare2: null,
-      gameSquare3: null,
-      gameSquare4: null,
-      gameSquare5: null,
-      gameSquare6: null,
-      gameSquare7: null,
-      gameSquare8: null,
-      gameSquare9: null,
-    })
+    setGame(Array(9).fill(null))
   }
 
   return (
     <div className="gameBoard" data-testid="gameBoard">
       <div className="gameBoard__inner">
-        {Object.keys(game).map((gameSquare: string, index) => {
+        {game.map((gameSquare: GameSquareType, index) => {
           return (
             <GameSquare
               key={index}
-              type={game[gameSquare as keyof Game]}
-              handleClick={() => handleClick(gameSquare as keyof Game)}
+              type={gameSquare}
+              handleClick={() => handleClick(index)}
               disabled={winner === Winner.DRAW || winner !== null}
             />
           )
