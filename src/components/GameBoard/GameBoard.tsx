@@ -92,6 +92,7 @@ const GameBoard = (): JSX.Element => {
           return (
             <GameSquare
               key={index}
+              testid={`gameSquare-${index}`}
               type={gameSquare}
               handleClick={() => handleClick(index)}
               disabled={winner === Winner.DRAW || winner !== null}

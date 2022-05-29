@@ -11,9 +11,10 @@ describe("<GameSquare />", () => {
         type={null}
         disabled={false}
         handleClick={handleClickMockFn}
+        testid="gameSquare-0"
       />
     )
-    const square = getByTestId("gameSquare")
+    const square = getByTestId("gameSquare-0")
     fireEvent.click(square)
     expect(handleClickMockFn).toHaveBeenCalled()
   })
@@ -21,9 +22,14 @@ describe("<GameSquare />", () => {
   it("does not register a click event when disabled", () => {
     const handleClickMockFn = jest.fn()
     const { getByTestId } = render(
-      <GameSquare type={null} disabled={true} handleClick={handleClickMockFn} />
+      <GameSquare
+        type={null}
+        disabled={true}
+        handleClick={handleClickMockFn}
+        testid="gameSquare-0"
+      />
     )
-    const square = getByTestId("gameSquare")
+    const square = getByTestId("gameSquare-0")
     fireEvent.click(square)
     expect(handleClickMockFn).not.toHaveBeenCalled()
   })
@@ -35,9 +41,10 @@ describe("<GameSquare />", () => {
         type={User.CROSS}
         disabled={false}
         handleClick={handleClickMockFn}
+        testid="gameSquare-0"
       />
     )
-    const square = getByTestId("gameSquare")
+    const square = getByTestId("gameSquare-0")
     fireEvent.click(square)
     expect(handleClickMockFn).not.toHaveBeenCalled()
   })

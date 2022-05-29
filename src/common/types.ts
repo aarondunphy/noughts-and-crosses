@@ -16,6 +16,7 @@ export interface GameSquareProps {
   type: GameSquareType
   disabled: boolean
   handleClick?: () => void
+  testid?: string
 }
 
 export interface OutcomeProps {

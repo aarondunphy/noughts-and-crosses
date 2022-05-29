@@ -6,12 +6,13 @@ const GameSquare = ({
   type,
   disabled,
   handleClick,
+  testid,
 }: GameSquareProps): JSX.Element => {
   return (
     <div
       className={"gameSquare " + (type || disabled ? "has-value" : "no-value")}
       onClick={type || disabled ? undefined : handleClick}
-      data-testid="gameSquare"
+      data-testid={testid}
     >
       {type === User.CROSS && <p data-testid="gameSquare-cross">X</p>}
       {type === User.NOUGHT && <p data-testid="gameSquare-nought">O</p>}
