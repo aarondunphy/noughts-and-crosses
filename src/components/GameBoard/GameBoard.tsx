@@ -18,9 +18,6 @@ const GameBoard = (): JSX.Element => {
   const [game, setGame] = useState<GameSquareType[]>(Array(9).fill(null))
 
   const handleClick = (gameIndex: number) => {
-    if (game[gameIndex] !== null || winner !== null) {
-      return
-    }
     setClicks(clicks + 1)
     updateGame(gameIndex, user)
     setUser(user === User.NOUGHT ? User.CROSS : User.NOUGHT)

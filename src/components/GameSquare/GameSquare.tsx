@@ -10,10 +10,11 @@ const GameSquare = ({
   return (
     <div
       className={"gameSquare " + (type || disabled ? "has-value" : "no-value")}
-      onClick={handleClick}
+      onClick={type || disabled ? undefined : handleClick}
+      data-testid="gameSquare"
     >
-      {type === User.CROSS && <p>X</p>}
-      {type === User.NOUGHT && <p>O</p>}
+      {type === User.CROSS && <p data-testid="gameSquare-cross">X</p>}
+      {type === User.NOUGHT && <p data-testid="gameSquare-nought">O</p>}
     </div>
   )
 }

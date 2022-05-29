@@ -13,7 +13,7 @@ export enum Winner {
 export type GameSquareType = User | null
 
 export interface GameSquareProps {
-  type: string | null
+  type: GameSquareType
   disabled: boolean
   handleClick?: () => void
 }
