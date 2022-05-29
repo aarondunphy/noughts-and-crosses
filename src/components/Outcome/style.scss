@@ -6,5 +6,11 @@
   &__playAgainButton {
     background-color: #fff;
     cursor: pointer;
+    border: 2px solid #2f343e;
+    &:hover {
+      background-color: #2f343e;
+      color: #fff;
+      border-color: #fff;
+    }
   }
 }

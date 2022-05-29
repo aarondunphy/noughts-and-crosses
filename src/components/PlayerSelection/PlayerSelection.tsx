@@ -35,7 +35,7 @@ export default function PlayerSelection(): JSX.Element {
               })
             }
             className="playerSelection__input"
-            placeholder="Enter player two name..."
+            placeholder="Player two name..."
             data-testid="ps-name-input"
           />
           <p className="playerSelection__playerInfo">Playing as crosses</p>
@@ -56,7 +56,7 @@ export default function PlayerSelection(): JSX.Element {
               })
             }
             className="playerSelection__input"
-            placeholder="Enter player one name..."
+            placeholder="Player one name..."
             data-testid="ps-name-input"
           />
           <p className="playerSelection__playerInfo">Playing as noughts</p>

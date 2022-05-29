@@ -1,13 +1,13 @@
 .gameBoard {
-  margin-bottom: 20px;
+  max-width: 280px;
+  margin: 0 auto;
+  @media (min-width: 700px) {
+    max-width: 500px;
+  }
   &__inner {
-    max-width: 462px;
     display: flex;
     flex-flow: wrap;
+    justify-content: center;
     margin-bottom: 3rem;
-
-    @media (max-width: 500px) {
-      max-width: 312px;
-    }
   }
 }

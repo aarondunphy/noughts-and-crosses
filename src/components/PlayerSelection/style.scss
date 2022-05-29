@@ -6,23 +6,44 @@
   }
   &__playerNamesContainer {
     display: flex;
-    gap: 3rem;
+    gap: 1rem;
     align-items: center;
     margin-bottom: 3rem;
+    flex-direction: column;
+    @media (min-width: 700px) {
+      gap: 3rem;
+      flex-direction: row;
+      justify-content: center;
+    }
   }
   &__input {
     color: #fff;
-    background-color: #8c97ae;
+    background-color: #2f343e;
     padding: 2rem;
-    font-size: 2.6rem;
-    border: 0;
+    font-size: 2rem;
+    border: 2px solid #fff;
+    border-top: 0;
+    border-left: 0;
+    border-right: 0;
+    width: 100%;
     &::placeholder {
       color: #c1d1ee;
     }
+    @media (min-width: 700px) {
+      font-size: 2.6rem;
+    }
   }
   &__startButton {
+    cursor: pointer;
     display: flex;
     margin: 0 auto;
+    text-transform: uppercase;
+    border: 2px solid #2f343e;
+    &:hover {
+      background-color: #2f343e;
+      color: #fff;
+      border-color: #fff;
+    }
   }
   &__playerInfo {
     font-size: 1.4rem;
