@@ -13,12 +13,12 @@ export default function Outcome({
     <div className="outcome">
       {winner === Winner.CROSS && (
         <h2 className="outcome__winner" data-testid="outcome-winner-cross">
-          {state.playerTwo.name} Wins! 🎉
+          {state.playerOne.name} Wins! 🎉
         </h2>
       )}
       {winner === Winner.NOUGHT && (
         <h2 className="outcome__winner" data-testid="outcome-winner-nought">
-          {state.playerOne.name} Wins! 🎉
+          {state.playerTwo.name} Wins! 🎉
         </h2>
       )}
       {winner === Winner.DRAW && (

@@ -33,13 +33,13 @@ export const useGame = () => {
   useEffect(() => {
     if (winner === Winner.CROSS) {
       dispatch({
-        type: GameContextActionTypes.UPDATE_PLAYER_TWO,
-        payload: { ...state.playerTwo, score: state.playerTwo.score + 1 },
+        type: GameContextActionTypes.UPDATE_PLAYER_ONE,
+        payload: { ...state.playerOne, score: state.playerOne.score + 1 },
       })
     } else if (winner === Winner.NOUGHT) {
       dispatch({
-        type: GameContextActionTypes.UPDATE_PLAYER_ONE,
-        payload: { ...state.playerOne, score: state.playerOne.score + 1 },
+        type: GameContextActionTypes.UPDATE_PLAYER_TWO,
+        payload: { ...state.playerTwo, score: state.playerTwo.score + 1 },
       })
     }
   }, [winner])

@@ -27,15 +27,15 @@ export default function PlayerSelection(): JSX.Element {
         <div>
           <input
             type="text"
-            value={state.playerTwo.name}
+            value={state.playerOne.name}
             onChange={(e) =>
               dispatch({
-                type: GameContextActionTypes.UPDATE_PLAYER_TWO,
-                payload: { ...state.playerTwo, name: e.target.value },
+                type: GameContextActionTypes.UPDATE_PLAYER_ONE,
+                payload: { ...state.playerOne, name: e.target.value },
               })
             }
             className="playerSelection__input"
-            placeholder="Player two name..."
+            placeholder="Player one name..."
             data-testid="ps-name-input"
           />
           <p className="playerSelection__playerInfo">Playing as crosses</p>
@@ -48,15 +48,15 @@ export default function PlayerSelection(): JSX.Element {
         <div>
           <input
             type="text"
-            value={state.playerOne.name}
+            value={state.playerTwo.name}
             onChange={(e) =>
               dispatch({
-                type: GameContextActionTypes.UPDATE_PLAYER_ONE,
-                payload: { ...state.playerOne, name: e.target.value },
+                type: GameContextActionTypes.UPDATE_PLAYER_TWO,
+                payload: { ...state.playerTwo, name: e.target.value },
               })
             }
             className="playerSelection__input"
-            placeholder="Player one name..."
+            placeholder="Player two name..."
             data-testid="ps-name-input"
           />
           <p className="playerSelection__playerInfo">Playing as noughts</p>
